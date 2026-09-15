@@ -33,10 +33,10 @@
           window.location.href = destination;
         } else if (destination) {
           document.getElementById("msg").textContent =
-            "Destination is set up wrong in Firebase (expected a plain web address, got something else).";
+            "[v3] Destination is set up wrong in Firebase — typeof is " + typeof destination + ", value: " + JSON.stringify(destination);
         } else {
           document.getElementById("msg").textContent =
-            "No destination set yet.";
+            "[v3] No destination set yet.";
         }
       })
       .catch(function () {
