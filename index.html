@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting…</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0d0c0b;
+    color: #f4f1ea;
+    font-family: Georgia, serif;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+  <p id="msg">Taking you there&hellip;</p>
 
+  <script>
+    var DB_URL = "https://rate--the-pieces-he-left-default-rtdb.firebaseio.com";
+
+    fetch(DB_URL + "/redirect/destination.json")
+      .then(function (r) { return r.json(); })
+      .then(function (destination) {
+        if (destination) {
+          window.location.href = destination;
+        } else {
+          document.getElementById("msg").textContent =
+            "No destination set yet.";
+        }
+      })
+      .catch(function () {
+        document.getElementById("msg").textContent =
+          "Something went wrong loading the redirect.";
+      });
+  </script>
+</body>
+</html>
