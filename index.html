@@ -23,11 +23,14 @@
   <script>
     var DB_URL = "https://rate--the-pieces-he-left-default-rtdb.firebaseio.com";
 
-    fetch(DB_URL + "/redirect/destination.json")
+    fetch(DB_URL + "/redirect.json")
       .then(function (r) { return r.json(); })
       .then(function (destination) {
-        if (destination) {
+        if (typeof destination === "string" && destination.indexOf("http") === 0) {
           window.location.href = destination;
+        } else if (destination) {
+          document.getElementById("msg").textContent =
+            "Destination is set up wrong in Firebase (expected a plain web address, got something else).";
         } else {
           document.getElementById("msg").textContent =
             "No destination set yet.";
